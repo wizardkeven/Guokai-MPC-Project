@@ -117,7 +117,7 @@ int main() {
           auto coeffs = polyfit(ptsx_transform, ptsy_transform, 3);
 
           //calculate initial state of vehicle: cte and epsi
-          double cte = -polyeval(coeffs, 0);
+          double cte = polyeval(coeffs, 0);
           //error of psi
           double epsi = -atan(coeffs[1]);
 
@@ -128,14 +128,14 @@ int main() {
           double y_ = 0.0;
           double psi_ = 0.0;
           const double Lf = 2.67;
-          double dt = 0.1;
+          double dt = 0.05;
               
-          x_ = x_ + v * cos(psi) * dt;
-          y_ = y_ + v * sin(psi) * dt;
-          psi_ = psi_ - (v/ Lf) * previous_delta_  * dt;
+          x_ = v * cos(psi) * dt;
+          y_ = v * sin(psi) * dt;
+          psi_ = -(v/ Lf) * previous_delta_  * dt;
           v = v + previous_a_ * dt;
           cte = cte + (v * sin(epsi) * dt);
-          epsi = epsi + v * previous_delta_ / Lf * dt;
+          epsi = epsi - v * previous_delta_ / Lf * dt;
 
           state << x_,y_,psi_,v,cte,epsi;
 
@@ -183,7 +183,7 @@ int main() {
           //.. add (x,y) points to list here, points are in reference to the vehicle's coordinate system
           // the points in the simulator are connected by a Yellow line
 
-          double poly_inc = 1.0;
+          double poly_inc = 2.5;
           int num_points = 25;
           for(int i = 0; i< num_points; i++)
           {
