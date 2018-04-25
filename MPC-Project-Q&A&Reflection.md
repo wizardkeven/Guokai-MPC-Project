@@ -1,7 +1,8 @@
 # Model Predictive Control
 
 
-## 1.This includes the state, actuators and update equations.
+## 1.The Model
+### State, Actuators and Update Equations
 
 First of all, let's discuss the state, actuators and update equations.
 
@@ -35,9 +36,16 @@ I pass the **state** into the model and the model will calculate the output actu
 * epsi`t+1` = (psi`t` - psi`{des}t`) - v`t`/Lf * delta`t`*dt
 
 Here I followed the tips and substituted the *+* with *-* in **psi** and **epsi** update equations.
+### Prediction and Update
 
-## 2. Student discusses the reasoning behind the chosen N (timestep length) and dt (elapsed duration between timesteps) values. Additionally the student details the previous values tried.
 
-## 3. Student discusses the reasoning behind the chosen N (timestep length) and dt (elapsed duration between timesteps) values. Additionally the student details the previous values tried.
 
-## 4. The student implements Model Predictive Control that handles a 100 millisecond latency. Student provides details on how they deal with latency.
+## 2. Timestep Length and Elapsed Duration (N & dt)
+
+### Reasoning behind the chosen N and dt values
+### the previous values tried.
+
+## 3. Polynomial Fitting and MPC Preprocessing
+
+## 4. Model Predictive Control with Latency
+The student implements Model Predictive Control that handles a 100 millisecond latency. Student provides details on how they deal with latency.
