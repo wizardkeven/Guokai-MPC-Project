@@ -97,7 +97,9 @@ Tuning these weights of cost function is definitely the core challenge and time 
 
 Weights of 1,2,3 will decide how many efforts the model will put on keeping the vehicle with reference set values: cte_ref, epsi_ref and v_ref. In my reasoning, keeping the car on track is the most important thing compared to keeping the desired velocity. The related part are weight 1 and 2. As the fitted reference path polynomial could contain error resulted from inaccurate map coordinates. There could also be inevitable error on current orientation angle and desired orientation angle because the vehicle may be trying to turn towards the desired position as it is not deviated while the latency and other factors is causing latency or errors. So I put weight 1 to very large value 4000 and weight 2 to 2000 to tell the model to punish heavily and weight 3 to 1 to tell the model to pay some attention on velocity error.
 
-Weight 4 and 5 will tell the model to punish dramatic steering and acceleration. As most of the road is straight line vehicle will not need to turn or accelerate violentely or 
+Weight 4 and 5 will tell the model to punish large steering and acceleration. As most of the road is straight line vehicle will not need to turn or accelerate drastically so these weights do not need to be too big. Frankly speaking, I do not know exactly whether the current weights are optimal because it seems these two don't have enormous effect on the model performance. Maybe they will need to be altered in a different testing environment. 
+
+Weight 6 and 7 are relating to the drastic intensity of steering and acceleration. We hope the vehicle is driven consistently and smoothly, so the drastic change on steering and acceleration should be punished heavily. So the weight 6 is set very big. As to weight 7, I think it may need a sudden brake or acceleration under certain circumstance so I leave it small. But it may need be altered to make the vehicle run more smoothly.
 
 ## 4. Model Predictive Control with Latency
 
