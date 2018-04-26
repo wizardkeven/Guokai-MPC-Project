@@ -128,7 +128,7 @@ int main() {
           double y_ = 0.0;
           double psi_ = 0.0;
           const double Lf = 2.67;
-          double dt = 0.05;
+          double dt = 0.02;
               
           x_ = v * cos(psi) * dt;
           y_ = v * sin(psi) * dt;

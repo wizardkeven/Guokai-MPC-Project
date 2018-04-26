@@ -7,7 +7,7 @@ using CppAD::AD;
 
 // TODO: Set the timestep length and duration
 size_t N = 10;
-double dt = 0.15;
+double dt = 0.16;
 
 // This value assumes the model presented in the classroom is used.
 //
@@ -37,7 +37,7 @@ size_t a_start = delta_start + N - 1;
 class FG_eval {
  public:
   // Fitted polynomial coefficients
-  Eigen::VectorXd coeffs;
+  Eigen::VectorXd coeffs; 
   FG_eval(Eigen::VectorXd coeffs) { this->coeffs = coeffs; }
 
   typedef CPPAD_TESTVECTOR(AD<double>) ADvector;
@@ -56,21 +56,21 @@ class FG_eval {
     // any anything you think may be beneficial.
     for(int i =0; i< N; i++)
     {
-      fg[0] += 4000*CppAD::pow(vars[cte_start + i] - ref_cte, 2);
-      fg[0] += 2000*CppAD::pow(vars[epsi_start + i] - ref_epsi, 2);
+      fg[0] += 3000*CppAD::pow(vars[cte_start + i] - ref_cte, 2);
+      fg[0] += 3000*CppAD::pow(vars[epsi_start + i] - ref_epsi, 2);
       fg[0] += CppAD::pow(vars[v_start + i] - ref_v, 2);
     }
 
     for(int t = 0; t < N-1; t++)
     {
-      fg[0] += 5*CppAD::pow(vars[delta_start + t], 2);
+      fg[0] += CppAD::pow(vars[delta_start + t], 2);
       fg[0] += 5*CppAD::pow(vars[a_start + t], 2);
     }
 
     // Minimize the value gap between sequential actuations.
     for (int t = 0; t < N - 2; t++) 
     {
-      fg[0] += 200*CppAD::pow(vars[delta_start + t + 1] - vars[delta_start + t], 2);
+      fg[0] += 300*CppAD::pow(vars[delta_start + t + 1] - vars[delta_start + t], 2);
       fg[0] += 10*CppAD::pow(vars[a_start + t + 1] - vars[a_start + t], 2);
     }
 
